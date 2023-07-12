@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(authRouter);
-const DB = "mongodb+srv://shiveshsumbly:ShivFlutterMongo19062002@clustereditor.ys4b9ae.mongodb.net/?retryWrites=true&w=majority";
+const DB = "mongodb+srv://<username:password>@clustereditor.ys4b9ae.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(DB).then(()=>{
     console.log("Connection successful");
