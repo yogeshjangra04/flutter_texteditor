@@ -2,13 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRouter = require("./routes/auth");
+const documentRouter = require("./routes/document");
 
 const PORT = process.env.PORT|3001;
 const app = express();
-app.use(cors());
+app.use(cors()); 
 app.use(express.json());
 app.use(authRouter);
-const DB = "mongodb+srv://<username:password>@clustereditor.ys4b9ae.mongodb.net/?retryWrites=true&w=majority";
+app.use(documentRouter);
+const DB = "mongodb+srv://<mongoDbUserName:password>@clustereditor.ys4b9ae.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(DB).then(()=>{
     console.log("Connection successful");

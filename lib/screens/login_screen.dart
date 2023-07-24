@@ -3,21 +3,19 @@ import 'package:collaborative_text_editor/repository/auth_repository.dart';
 import 'package:collaborative_text_editor/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
   void signIn(WidgetRef ref, BuildContext context) async {
     final scaffold = ScaffoldMessenger.of(context);
-    final navigator = Navigator.of(context);
+    final navigator = Routemaster.of(context);
     final res = await ref.read(authRepositoryProvider).signIn();
     if (res.error == null) {
       ref.read(userProvider.notifier).update((state) => res.data);
-      navigator.push(
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ),
-      );
+      navigator.replace('/');
     } else {
+      print(res.error);
       scaffold.showSnackBar(
         SnackBar(
           content: Text(res.error!),
